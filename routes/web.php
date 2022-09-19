@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TelegramNewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('setwebhook', [\App\Http\Controllers\TelegramController::class, 'setWebhook']);
-Route::match(['get', 'post'],\Telegram\Bot\Laravel\Facades\Telegram::getAccessToken(), [\App\Http\Controllers\TelegramController::class, 'action']);
+Route::get('set-webhook', [TelegramNewController::class,'setWebHook']);
+Route::get('unset-webhook', [TelegramNewController::class,'unsetWebHook']);
+Route::match(['get', 'post'],'telegram/webhook', [TelegramNewController::class, 'webhook']);
 
